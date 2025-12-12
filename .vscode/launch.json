@@ -1,0 +1,24 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "TSPCaseStudy",
+            "request": "launch",
+            "mainClass": "casestudy.TSPCaseStudy",
+            "projectName": "GA_TSP_ddeea099"
+        },
+        {
+            "type": "java",
+            "name": "Run App",
+            "request": "launch",
+            "mainClass": "App",
+            "projectName": "GA_TSP",
+            "classPaths": [
+                "bin"
+            ],
+            "args": ""
+        }
+    ]
+}
+
