@@ -1,7 +1,4 @@
-import library.*;
-import library.*;
-import core.*;
-import operators.*;
+import geneticalgorithm.library.*;
 
 public class App {
     public static void main(String[] args) throws Exception {

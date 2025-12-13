@@ -31,7 +31,7 @@ public class CaseStudyEvaluator {
         // Create OutputDomain
         OutputDomain outputDomain = new OutputDomain(travelTime);
 
-        // Create MamdaniEngine and set operators
+        // Create MamdaniEngine and set geneticalgorithm.geneticalgorithm.operators
         MamdaniEngine mamdaniEngine = new MamdaniEngine();
         mamdaniEngine.setAndOperator(new MinTNorm());
         mamdaniEngine.setOrOperator(new MaxSNorm());

@@ -1,10 +1,9 @@
 package casestudy;
 
 import java.util.List;
-import core.*;
-import library.GeneticAlgorithm;
-import library.PermutationGeneticAlgorithm;
-import operators.*;
+import geneticalgorithm.core.*;
+import geneticalgorithm.library.GeneticAlgorithm;
+import geneticalgorithm.library.PermutationGeneticAlgorithm;
 
 public class TSPCaseStudy {
     

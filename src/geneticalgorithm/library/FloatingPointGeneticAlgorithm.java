@@ -1,15 +1,15 @@
-package library;
+package geneticalgorithm.library;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
-import core.Chromosome;
-import core.FloatingPointChromosome;
-import operators.ElitistReplacement;
-import operators.GaussianMutation;
-import operators.RouletteWheelSelection;
-import operators.SinglePointCrossover;
+import geneticalgorithm.core.Chromosome;
+import geneticalgorithm.core.FloatingPointChromosome;
+import geneticalgorithm.operators.ElitistReplacement;
+import geneticalgorithm.operators.GaussianMutation;
+import geneticalgorithm.operators.RouletteWheelSelection;
+import geneticalgorithm.operators.SinglePointCrossover;
 
 public class FloatingPointGeneticAlgorithm extends GeneticAlgorithm {
     private double lowerBound;

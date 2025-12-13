@@ -1,4 +1,4 @@
-package core;
+package geneticalgorithm.core;
 
 @FunctionalInterface
 public interface FitnessFunction {

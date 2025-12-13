@@ -1,15 +1,15 @@
-package library;
+package geneticalgorithm.library;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
-import core.Chromosome;
-import core.InfeasibilityCheck;
-import operators.Crossover;
-import operators.Mutation;
-import operators.Replacement;
-import operators.Selection;
+import geneticalgorithm.core.Chromosome;
+import geneticalgorithm.core.InfeasibilityCheck;
+import geneticalgorithm.operators.Crossover;
+import geneticalgorithm.operators.Mutation;
+import geneticalgorithm.operators.Replacement;
+import geneticalgorithm.operators.Selection;
 
 public abstract class GeneticAlgorithm {
     

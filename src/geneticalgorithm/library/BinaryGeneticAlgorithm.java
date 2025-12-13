@@ -1,11 +1,11 @@
-package library;
+package geneticalgorithm.library;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
-import core.Chromosome;
-import operators.BinaryGenerationIntialization;
-import operators.GenerationIntializater;
+import geneticalgorithm.core.Chromosome;
+import geneticalgorithm.operators.BinaryGenerationIntialization;
+import geneticalgorithm.operators.GenerationIntializater;
 
 public class BinaryGeneticAlgorithm extends GeneticAlgorithm{
 

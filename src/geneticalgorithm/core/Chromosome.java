@@ -1,4 +1,4 @@
-package core;
+package geneticalgorithm.core;
 import java.util.List;
 
 public interface Chromosome {
