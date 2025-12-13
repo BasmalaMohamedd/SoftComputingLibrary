@@ -7,4 +7,10 @@ public interface Chromosome {
     public List getGenesList();
 
     public int getLength();
+
+    public Chromosome clone();
+
+    public void setGene(int index, double value);
+
+
 }

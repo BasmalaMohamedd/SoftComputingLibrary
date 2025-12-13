@@ -43,7 +43,20 @@ public class PermutationChromosome implements Chromosome {
         }
     }
 
+    @Override
+    public void setGene(int index, double value) {
+        // Convert double to int for permutation chromosome
+        setGene(index, (int) value);
+    }
+
     public void setGenesList(List<Integer> genes) {
         this.genesList = new ArrayList<>(genes);
+    }
+
+    @Override
+    public Chromosome clone() {
+        PermutationChromosome cloned = new PermutationChromosome();
+        cloned.setGenesList(this.genesList);
+        return cloned;
     }
 }

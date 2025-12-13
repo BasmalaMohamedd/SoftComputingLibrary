@@ -21,7 +21,12 @@ public class BinaryGeneticAlgorithm extends GeneticAlgorithm{
 
     public List<Double> evaluateFitness(List<Chromosome> currentGeneration)
     {
-        return null;
+        List<Double> fitnessList = new ArrayList<>();
+        for (Chromosome chromosome : currentGeneration) {
+            double fitness = fitnessFunction.apply(chromosome);
+            fitnessList.add(fitness);
+        }
+        return fitnessList;
     }
 
     

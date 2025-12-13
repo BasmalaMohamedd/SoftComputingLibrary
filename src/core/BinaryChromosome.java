@@ -22,13 +22,19 @@ public class BinaryChromosome implements Chromosome{
         
     }
 
-    public void setGene(int index,int gene)
+    public void setGene(int index, int gene)
     {
         if(index < genesList.size())
         {
             genesList.set(index, determineGeneValue(gene));
         }
-        
+    }
+
+    @Override
+    public void setGene(int index, double value)
+    {
+        // Convert double to int for binary chromosome
+        setGene(index, (int) value);
     }
     @Override
     public int getLength(){
@@ -54,6 +60,15 @@ public class BinaryChromosome implements Chromosome{
     @Override
     public List<Integer> getGenesList(){
         return genesList;
+    }
+
+    @Override
+    public Chromosome clone() {
+        BinaryChromosome cloned = new BinaryChromosome();
+        for (int gene : this.genesList) {
+            cloned.addGene(gene);
+        }
+        return cloned;
     }
 
 
