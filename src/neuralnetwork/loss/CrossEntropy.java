@@ -16,6 +16,6 @@ public class CrossEntropy implements LossFunction {
 //
 
     public double derivative(double expected, double predicted) {
-        return predicted - expected;
+        return -(expected / predicted) + ((1 - expected) / (1 - predicted));
     }
 }
