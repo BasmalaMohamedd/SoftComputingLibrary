@@ -9,5 +9,5 @@ public class Linear implements ActivationFunction {
     }
 
     @Override
-    public double derivative(double x) {return 1.0;}
+    public double derivative(double activation) {return 1.0;}
 }

@@ -12,8 +12,8 @@ public class ReLU implements ActivationFunction {
     }
 
     @Override
-    public double derivative(double x) {
-        if(x > 0) return 1.0;
+    public double derivative(double activation) {
+        if(activation > 0) return 1.0;
 
         return 0;
     }

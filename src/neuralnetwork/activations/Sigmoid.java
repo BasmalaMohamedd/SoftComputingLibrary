@@ -13,7 +13,7 @@ public class Sigmoid implements ActivationFunction {
     }
 
     @Override
-    public double derivative(double x) {
-        return activate(x) * (1.0 - activate(x));
+    public double derivative(double activation) {
+        return activation * (1.0 - activation);
     }
 }
