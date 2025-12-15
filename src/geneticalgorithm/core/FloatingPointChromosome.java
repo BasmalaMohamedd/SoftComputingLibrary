@@ -62,11 +62,7 @@ public class FloatingPointChromosome implements Chromosome {
         }
     }
 
-    @Override
-    public void setGene(int index, double value) {
-        setGene(index, value);
-    }
-
+    
     public void setGenesList(List<Double> genes) {
         this.genesList = new ArrayList<>(genes);
     }
