@@ -74,23 +74,41 @@ public class FeedForwardNeuralNetwork extends NeuralNetwork {
         );
 
     }
-    
 
-    public void fit(double[] x_train, double[] y_train){
-        //forward pass
-        double [] output = layers.get(0).forward(x_train);
+    private double[] performForwardPass(double[] x){
+        double [] output = layers.get(0).forward(x);
         for(int i = 1; i < numberOfLayers; i++)
         {
             output = layers.get(i).forward(output);
         }
+        return output;
 
-        double loss = 0.00; 
-        for(int i = 0; i < outputSize; i++)
-        {
-            loss += lossFunction.calculateLoss(y_train[i], output[i]);
-        }
-        loss = loss / outputSize;
+    }
 
+    private void performBackwardPass(double[] outputGradient)
+    {
+        double[] inputGradient = layers.get(numberOfLayers - 1).backward(outputGradient, learningRate);
+            for(int j = numberOfLayers - 2; j >= 0; j--)
+            {
+                inputGradient = layers.get(j).backward(inputGradient, learningRate);
+            }
+    }
+    
+    private double calculateLoss(double[] expected, double[] predicted)
+    {
+        double loss = 0.00;
+        for(int j = 0; j < outputSize; j++)
+            {
+                loss += lossFunction.calculateLoss(expected[j], predicted[j]);
+            }
+            loss = loss / outputSize;
+            return loss;
+    }
+
+    public void fit(double[] x_train, double[] y_train){
+        //forward pass
+        double[] output = performForwardPass(x_train);
+        double loss = calculateLoss(y_train, output); 
         for(int i = 0; i < maxIterations && loss > acceptedErrorRate ; i++)
         {
             //loss derivative
@@ -100,29 +118,10 @@ public class FeedForwardNeuralNetwork extends NeuralNetwork {
                 outputGradient[j] = lossFunction.derivative(y_train[j], output[j]);
             }
             //backward pass
-            double[] inputGradient = layers.get(numberOfLayers - 1).backward(outputGradient, learningRate);
-            for(int j = numberOfLayers - 2; j >= 0; j--)
-            {
-                inputGradient = layers.get(j).backward(inputGradient, learningRate);
-            }
-
-
+            performBackwardPass(outputGradient);
             //forward pass
-            output = layers.get(0).forward(x_train);
-        for(int j = 1; j < numberOfLayers; j++)
-        {
-            output = layers.get(j).forward(output);
-        }
-
-        loss = 0.00; 
-        for(int j = 0; j < outputSize; j++)
-        {
-            loss += lossFunction.calculateLoss(y_train[j], output[j]);
-        }
-        loss = loss / outputSize;
-
-            
-
+            output = performForwardPass(x_train);
+            loss = calculateLoss(y_train, output);
         }
 
         
@@ -130,28 +129,14 @@ public class FeedForwardNeuralNetwork extends NeuralNetwork {
     }
 
     public double[] predict(double[] x_predict){
-        double [] output = layers.get(0).forward(x_predict);
-        for(int i = 1; i < numberOfLayers; i++)
-        {
-            output = layers.get(i).forward(output);
-        }
-        return output;
+        return performForwardPass(x_predict);
     }
 
     public Double score(double[] x_test, double[] y_test)
     {
         double[] y_predicted = predict(x_test);
-        double loss = 0.00; 
-        for(int i = 0; i < outputSize; i++)
-        {
-            loss += lossFunction.calculateLoss( y_test[i], y_predicted[i]);
-        }
-        loss = loss / outputSize;
+        double loss = calculateLoss(y_test, y_predicted); 
         return 1 - loss;
     }
-
-    
-
-    
 }
 
