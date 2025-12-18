@@ -1,5 +1,4 @@
 package neuralnetwork.core;
-
 import neuralnetwork.activations.ActivationFunction;
 import neuralnetwork.initialization.WeightInitializer;
 import neuralnetwork.optimizers.Optimizer;
@@ -33,7 +32,7 @@ public class DenseLayer extends Layer {
             a[i] = activation.activate(z[i]);
         }
         return a;
-    }
+    } 
 
     @Override
     public double[] backward(double[] outputGradient, double learningRate) {
