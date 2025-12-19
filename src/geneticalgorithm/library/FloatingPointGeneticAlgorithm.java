@@ -1,35 +1,33 @@
 package geneticalgorithm.library;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Function;
-
 import geneticalgorithm.core.Chromosome;
 import geneticalgorithm.core.FloatingPointChromosome;
 import geneticalgorithm.operators.ElitistReplacement;
 import geneticalgorithm.operators.GaussianMutation;
 import geneticalgorithm.operators.RouletteWheelSelection;
 import geneticalgorithm.operators.SinglePointCrossover;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Function;
 
 public class FloatingPointGeneticAlgorithm extends GeneticAlgorithm {
     private double lowerBound;
     private double upperBound;
 
     public FloatingPointGeneticAlgorithm(int populationSize, int chromosomeLength,
-                                         float crossoverRate, float mutationRate,
-                                         int generations, Function<Chromosome, Double> fitnessFunction) {
+            float crossoverRate, float mutationRate,
+            int generations, Function<Chromosome, Double> fitnessFunction) {
         this(populationSize, chromosomeLength, crossoverRate, mutationRate, generations, fitnessFunction, 0.0, 1.0);
     }
 
     public FloatingPointGeneticAlgorithm(int populationSize, int chromosomeLength,
-                                         float crossoverRate, float mutationRate,
-                                         int generations, Function<Chromosome, Double> fitnessFunction,
-                                         double lowerBound, double upperBound) {
+            float crossoverRate, float mutationRate,
+            int generations, Function<Chromosome, Double> fitnessFunction,
+            double lowerBound, double upperBound) {
         super(populationSize, chromosomeLength, crossoverRate, mutationRate, generations, fitnessFunction);
         this.lowerBound = lowerBound;
         this.upperBound = upperBound;
 
-       
         this.selection = new RouletteWheelSelection();
         this.crossover = new SinglePointCrossover();
         this.mutation = new GaussianMutation(mutationRate);

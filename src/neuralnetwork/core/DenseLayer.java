@@ -1,4 +1,5 @@
 package neuralnetwork.core;
+
 import neuralnetwork.activations.ActivationFunction;
 import neuralnetwork.initialization.WeightInitializer;
 import neuralnetwork.optimizers.Optimizer;
@@ -11,9 +12,10 @@ public class DenseLayer extends Layer {
     private ActivationFunction activation;
     private Optimizer optimizer;
     private double[] lastInput;
-    private double[] lastZ;
+    private double[] lastOutput; 
 
-    public DenseLayer(int inputSize, int outputSize, ActivationFunction activation, WeightInitializer initializer, Optimizer optimizer) {
+    public DenseLayer(int inputSize, int outputSize, ActivationFunction activation, WeightInitializer initializer,
+            Optimizer optimizer) {
         super(inputSize, outputSize);
         this.activation = activation;
         this.weights = new double[outputSize][inputSize];
@@ -26,20 +28,20 @@ public class DenseLayer extends Layer {
     public double[] forward(double[] input) {
         lastInput = input.clone();
         double[] z = MatrixUtils.add(MatrixUtils.multiply(weights, input), biases);
-        lastZ = z.clone();
         double[] a = new double[z.length];
         for (int i = 0; i < z.length; i++) {
             a[i] = activation.activate(z[i]);
         }
+        lastOutput = a.clone(); 
         return a;
-    } 
+    }
 
     @Override
     public double[] backward(double[] outputGradient, double learningRate) {
-        // Compute dA/dZ
+       
         double[] dZ = new double[outputGradient.length];
         for (int i = 0; i < outputGradient.length; i++) {
-            dZ[i] = outputGradient[i] * activation.derivative(lastZ[i]);
+            dZ[i] = outputGradient[i] * activation.derivative(lastOutput[i]);
         }
 
         // Compute gradients

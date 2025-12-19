@@ -3,15 +3,13 @@
 package neuralnetwork.initialization;
 
 public class RandomUniform implements WeightInitializer {
-    
-   @Override
-   public void initialize(double [][] weights, int in, int out){
 
-       for (int i = 0 ; i < in; i++){
-           for (int j = 0 ; j < out; j++){
-               weights[i][j] = Math.random() - 0.5;
-           }
-       }
-   }
+    @Override
+    public void initialize(double[][] weights, int in, int out) {
+        for (int i = 0; i < out; i++) {
+            for (int j = 0; j < in; j++) {
+                weights[i][j] = Math.random() - 0.5;
+            }
+        }
+    }
 }
-

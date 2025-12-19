@@ -12,7 +12,7 @@ import geneticalgorithm.operators.Replacement;
 import geneticalgorithm.operators.Selection;
 
 public abstract class GeneticAlgorithm {
-    
+
     protected int populationSize;
     protected int chromosomeLength;
     protected float crossoverRate;
@@ -24,10 +24,9 @@ public abstract class GeneticAlgorithm {
     protected Mutation mutation;
     protected Replacement replacement;
     protected InfeasibilityCheck infeasibilityCheck;
-    
 
-    public GeneticAlgorithm(int populationSize, int chromosomeLength, float crossoverRate, float mutationRate,int generations, Function<Chromosome, Double> fitnessFunction)
-    {
+    public GeneticAlgorithm(int populationSize, int chromosomeLength, float crossoverRate, float mutationRate,
+            int generations, Function<Chromosome, Double> fitnessFunction) {
         this.populationSize = populationSize;
         this.chromosomeLength = chromosomeLength;
         this.crossoverRate = crossoverRate;
@@ -36,8 +35,7 @@ public abstract class GeneticAlgorithm {
         this.fitnessFunction = fitnessFunction;
     }
 
-    public void setSelection(Selection selection)
-    {
+    public void setSelection(Selection selection) {
         this.selection = selection;
     }
 
@@ -48,6 +46,7 @@ public abstract class GeneticAlgorithm {
     public void setMutation(Mutation mutation) {
         this.mutation = mutation;
     }
+
     public void setReplacement(Replacement replacement) {
         this.replacement = replacement;
     }
@@ -80,29 +79,21 @@ public abstract class GeneticAlgorithm {
         this.fitnessFunction = fitnessFunction;
     }
 
-
     public abstract List<Double> evaluateFitness(List<Chromosome> currentGeneration);
 
-
-
-    
     public abstract List<Chromosome> initializeGenerations();
 
-     
-    public boolean isOptimal(List<Chromosome> currentGeneration)
-    {
+    public boolean isOptimal(List<Chromosome> currentGeneration) {
         return false;
     }
 
-
     public Chromosome run() {
         List<Chromosome> currentGeneration = initializeGenerations();
-        
-        
+
         if (infeasibilityCheck != null) {
             currentGeneration = removeInfeasible(currentGeneration);
         }
-        
+
         List<Double> fitnessList = evaluateFitness(currentGeneration);
 
         Chromosome globalBest = currentGeneration.get(0);
@@ -120,22 +111,19 @@ public abstract class GeneticAlgorithm {
             List<Chromosome> mutatedParents = mutation.mutate(parents);
             List<Chromosome> mutatedChildren = mutation.mutate(children);
 
-            
             if (infeasibilityCheck != null) {
                 mutatedParents = removeInfeasible(mutatedParents);
                 mutatedChildren = removeInfeasible(mutatedChildren);
             }
 
             currentGeneration = replacement.replace(mutatedParents, mutatedChildren);
-            
-           
+
             while (currentGeneration.size() > populationSize) {
                 currentGeneration.remove(currentGeneration.size() - 1);
             }
-            
+
             fitnessList = evaluateFitness(currentGeneration);
 
-          
             for (int j = 0; j < fitnessList.size(); j++) {
                 if (fitnessList.get(j) > globalBestFitness) {
                     globalBestFitness = fitnessList.get(j);
@@ -143,10 +131,9 @@ public abstract class GeneticAlgorithm {
                 }
             }
 
-          
             if ((i + 1) % 20 == 0) {
-                System.out.println("Generation " + (i + 1) + ": Best Fitness = " + 
-                                   String.format("%.4f", globalBestFitness));
+                System.out.println("Generation " + (i + 1) + ": Best Fitness = " +
+                        String.format("%.4f", globalBestFitness));
             }
         }
 
@@ -160,12 +147,11 @@ public abstract class GeneticAlgorithm {
                 feasible.add(chromosome);
             }
         }
-        
-        
+
         if (feasible.isEmpty()) {
             return population;
         }
-        
+
         return feasible;
     }
 
